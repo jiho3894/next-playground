@@ -18,13 +18,22 @@ const Home: NextPage = () => {
     setInputId(Id);
     setValue("Id", "");
   };
+  console.log(duck);
   return (
     <div className="w-full h-screen bg-blue-400">
-      <form onSubmit={handleSubmit(onValid)}>
-        <input {...register("Id")} />
-      </form>
-      <Link href={`/details/${inputId}`}>{inputId}</Link>
-      <Image alt="" src={duck} placeholder="blur" quality={5} />
+      <Image
+        alt=""
+        src="https://avatars.githubusercontent.com/u/79081800?v=4"
+        // layout="fill"
+        width={50}
+        height={50}
+      />
+      <div className="w-full text-center text-red-500 absolute">
+        <form onSubmit={handleSubmit(onValid)}>
+          <input {...register("Id")} />
+        </form>
+        <Link href={`/details/${inputId}`}>{inputId}</Link>
+      </div>
     </div>
   );
 };
