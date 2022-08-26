@@ -1,9 +1,12 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useCookies } from "react-cookie";
 import { SubmitHandler, useForm } from "react-hook-form";
-import duck from "../public/duck.jpg";
+import Skeleton from "react-loading-skeleton";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 // 유저 프로필 검색 페이지
 
@@ -16,9 +19,11 @@ const Home: NextPage = () => {
   const [inputId, setInputId] = useState<String>("");
   const onValid: SubmitHandler<ProfileId> = ({ Id }) => {
     setInputId(Id);
+    setCookie("id", Id);
     setValue("Id", "");
   };
-  console.log(duck);
+  const [cookies, setCookie] = useCookies(["id"]);
+  console.log(cookies);
   return (
     <div className="w-full h-screen bg-blue-400">
       <Image
@@ -28,9 +33,10 @@ const Home: NextPage = () => {
         width={50}
         height={50}
       />
-      <div className="w-full text-center text-red-500 absolute">
+      <div className="w-full text-center text-gray-700 absolute">
         <form onSubmit={handleSubmit(onValid)}>
-          <input {...register("Id")} />
+          <Input register={register("Id", { required: true })} />
+          <Button text="안녕" type="submit" />
         </form>
         <Link href={`/details/${inputId}`}>{inputId}</Link>
       </div>
