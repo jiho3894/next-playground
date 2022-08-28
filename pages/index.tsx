@@ -35,7 +35,7 @@ const Home: NextPage = () => {
       />
       <div className="w-full text-center text-gray-700 absolute">
         <form onSubmit={handleSubmit(onValid)}>
-          <Input register={register("Id", { required: true })} />
+          <Input type="file" register={register("Id", { required: true })} />
           <Button text="안녕" type="submit" />
         </form>
         <Link href={`/details/${inputId}`}>{inputId}</Link>
